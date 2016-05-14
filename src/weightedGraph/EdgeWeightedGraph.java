@@ -29,7 +29,8 @@ public class EdgeWeightedGraph
         {
             int v = in.nextInt();
             int w = in.nextInt();
-            addEdge(v, w);
+            int weight = in.nextInt();
+            addEdge(new Edge(v, w, weight));
         }
     }
     
