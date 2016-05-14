@@ -15,7 +15,22 @@ public class ConnectedComponentsTester
         System.out.println("Loading graph...");
         Digraph test = loadGraph();
         if (test != null) {
-            System.out.println("Graph loaded successfully.");
+            System.out.println("Graph loaded successfully. Running ConnectedComponents()...");
+            ConnectedComponents CC = new ConnectedComponents(test);
+
+            System.out.println("Found " + CC.count() + " components.");
+
+            System.out.println("Components list:");
+            for (int i = 0; i < CC.count(); i++) {
+                System.out.println("Component " + i + ":");
+                for (int j = 0; j < test.V(); j++) {
+                    if (CC.id(j) == i) {
+                        System.out.print(j + " ");
+                    }
+                }
+                System.out.println();
+            }
+
         }
         else {
             System.out.println("File read error.");
@@ -24,7 +39,7 @@ public class ConnectedComponentsTester
 
     private static Digraph loadGraph()
     {
-        File graph = new File("graph.txt");
+        File graph = new File("C:\\Users\\Pete\\IdeaProjects\\CIS27-Lab4\\src\\digraph\\graph.txt");
 
         try
         {
