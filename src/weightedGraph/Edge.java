@@ -42,8 +42,19 @@ public class Edge
         else return 0;
     }
 
+    public boolean isMarked(boolean[] marked)
+    {
+        return marked[v] == true && marked[w] == true;
+    }
+
+    public void mark(boolean[] marked)
+    {
+        marked[v] = true;
+        marked[w] = true;
+    }
+
     public String toString()
     {
-        return String.format("%d-%d %.5f", v, w, weight);
+        return String.format("[" + v + ", " + w + ", " + weight + "] ");
     }
 }

@@ -1,25 +1,25 @@
 package weightedGraph;
 
-import java.util.ArrayList;
-
 /**
  * Created by Pete Wilcox on 5/16/2016.
  * petercwilcox@gmail.com
  */
 public class MST
+        implements Comparable<MST>
 {
     private EdgeWeightedGraph G;
     private boolean[] marked;
     private int[] edgeTo;
     private int cost;
-    private ArrayList<Edge> tree;
-    private EdgeHeap possibles;
+    private Bag<Edge> tree;
+    private MinHeap<Edge> possibles;
 
     public MST(EdgeWeightedGraph g, int[] roots)
     {
         G = g;
-        tree = new ArrayList<>();
-        possibles = new EdgeHeap();
+        tree = new Bag<>();
+        possibles = new MinHeap<>();
+        marked = new boolean[G.V()];
         cost = 0;
 
         for (int i = 0; i < roots.length; i++)
@@ -31,17 +31,65 @@ public class MST
 
         while (!possibles.isEmpty())
         {
+
             Edge temp = possibles.remove();
-            if (!marked[temp.either()] && !marked[temp.other(temp.either())])
+            //System.out.println("Possibles not empty yet - removed " + temp + ".");
+            if (!temp.isMarked(marked))
             {
-                if (!marked[temp.either()])
-                    marked[temp.either()] = true;
-                else
-                    marked[temp.other(temp.either())] = true;
+                temp.mark(marked);
 
                 tree.add(temp);
                 cost += temp.weight();
+                //System.out.println("Added edge " + temp);
             }
         }
+    }
+
+    public MST(EdgeWeightedGraph g, int root)
+    {
+        G = g;
+        tree = new Bag<>();
+        possibles = new MinHeap<>();
+        marked = new boolean[G.V()];
+        cost = 0;
+
+        marked[root] = true;
+        for (Edge e : G.adj(root))
+            possibles.insert(e);
+
+        while (!possibles.isEmpty())
+        {
+
+            Edge temp = possibles.remove();
+            //System.out.println("Possibles not empty yet - removed " + temp + ".");
+            if (temp.isMarked(marked))
+            {
+                temp.mark(marked);
+
+                tree.add(temp);
+                cost += temp.weight();
+                //System.out.println("Added edge " + temp);
+            }
+        }
+    }
+
+    public int cost()
+    {
+        return cost;
+    }
+
+    public String toString()
+    {
+        String output = "";
+        for (Edge e : tree)
+            output = output + e;
+        return output;
+    }
+
+    public int compareTo(MST that)
+    {
+        if (this.cost() < that.cost()) return -1;
+        else if (this.cost() > that.cost()) return 1;
+        else return 0;
     }
 }
