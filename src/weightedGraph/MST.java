@@ -13,6 +13,7 @@ public class MST
     private int cost;
     private Bag<Edge> tree;
     private MinHeap<Edge> possibles;
+    private int root;
 
     public MST(EdgeWeightedGraph g, int[] roots)
     {
@@ -40,6 +41,10 @@ public class MST
 
                 tree.add(temp);
                 cost += temp.weight();
+
+                for (Edge e : G.adj(temp.otherVertex(marked)))
+                    possibles.insert(e);
+
                 //System.out.println("Added edge " + temp);
             }
         }
@@ -52,6 +57,7 @@ public class MST
         possibles = new MinHeap<>();
         marked = new boolean[G.V()];
         cost = 0;
+        this.root = root;
 
         marked[root] = true;
         for (Edge e : G.adj(root))
@@ -62,13 +68,14 @@ public class MST
 
             Edge temp = possibles.remove();
             //System.out.println("Possibles not empty yet - removed " + temp + ".");
-            if (temp.isMarked(marked))
+            if (!temp.isMarked(marked))
             {
                 temp.mark(marked);
 
                 tree.add(temp);
                 cost += temp.weight();
-                //System.out.println("Added edge " + temp);
+                for (Edge e : G.adj(temp.otherVertex(marked)))
+                    possibles.insert(e);
             }
         }
     }
@@ -92,4 +99,6 @@ public class MST
         else if (this.cost() > that.cost()) return 1;
         else return 0;
     }
+
+    public int root() { return root;}
 }

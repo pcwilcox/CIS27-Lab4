@@ -35,6 +35,12 @@ public class Edge
         else throw new RuntimeException("Inconsistent edge.");
     }
 
+    public int otherVertex(boolean[] m)
+    {
+        if (!m[v]) return v;
+        return w;
+    }
+
     public int compareTo(Edge that)
     {
         if (this.weight() < that.weight()) return -1;
