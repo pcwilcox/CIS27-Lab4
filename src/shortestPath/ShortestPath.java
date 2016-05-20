@@ -64,7 +64,7 @@ public class ShortestPath
         String output = "";
         for (int i = 0; i < V; i++)
         {
-            output = output + "[Vertex: " + i + ", distTo: " + distTo[i] + ", edgeTo: " + edgeTo[i].from() + "]";
+            output = output + "[" + i + "," + distTo[i] + "," + edgeTo[i] + "]";
         }
         return output;
     }
@@ -75,6 +75,7 @@ public class ShortestPath
     }
 
     public int cost() {
+        cost = 0;
         for (int i = 0; i < V; i++) {
             cost += distTo(i);
         }
