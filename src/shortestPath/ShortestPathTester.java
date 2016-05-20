@@ -20,13 +20,8 @@ public class ShortestPathTester
         ShortestPath test28 = new ShortestPath(graph, 28);
         ShortestPath test40 = new ShortestPath(graph, 40);
 
-        for (int i = 0; i < 50 && i != 7 && i != 14 && i != 25 && i != 28 && i != 40; i++) {
-            System.out.println("Testing vertex " + i + ": ");
-            System.out.println("Shortest path from vertex 7: " + test7.distTo(i));
-            System.out.println("Shortest path from vertex 14: " + test14.distTo(i));
-            System.out.println("Shortest path from vertex 25: " + test25.distTo(i));
-            System.out.println("Shortest path from vertex 28: " + test28.distTo(i));
-            System.out.println("Shortest path from vertex 40: " + test40.distTo(i));
+        for (int i = 0; i < 50; i++) {
+            System.out.println("Testing vertex " + i + ": " + test7.distTo(i) + " " + test14.distTo(i) +" " + test25.distTo(i) +" " + test28.distTo(i) + " " + test40.distTo(i));
 
         }
     }

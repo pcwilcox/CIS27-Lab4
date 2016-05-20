@@ -42,7 +42,7 @@ public class ShortestPath
     {
         for (Edge e : g.adj(v))
         {
-            int w = e.to();
+            int w = e.other(v);
             if (distTo[w] > distTo[v] + e.weight())
             {
                 distTo[w] = distTo[v] + e.weight();

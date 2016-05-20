@@ -50,7 +50,7 @@ public class IndexMinHeap
     // Add an element, resizing if necessary
     public void insert(int i, int j)
     {
-        if (++size >= keys.length)
+        if (++size == keys.length)
         {
             resize();
         }
@@ -117,8 +117,18 @@ public class IndexMinHeap
     // Helper to resize as necessary
     private void resize()
     {
-        int[] newKeys = new int[2 * size];
-        int[] newVals = new int[2 * size];
+        int[] newKeys;
+        int[] newVals;
+        if (size > 0)
+        {
+            newKeys = new int[2 * size];
+            newVals = new int[2 * size];
+        }
+        else
+        {
+            newKeys = new int[1];
+            newVals = new int[1];
+        }
         for (int i = 1; i <= size &&
                         i < keys.length &&
                         i < newKeys.length; i++)
