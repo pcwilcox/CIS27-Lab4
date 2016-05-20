@@ -119,4 +119,12 @@ public class IndexMinHeap<Key extends Comparable<Key>, Item>
             else sink(oldIndex);
         }
     }
+
+    public Key minKey() {
+        return keys.get(1);
+    }
+
+    public Item minItem() {
+        return vals.get(1);
+    }
 }

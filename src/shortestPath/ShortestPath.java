@@ -32,7 +32,11 @@ public class ShortestPath
         pq.insert(root, 0);
 
         while (!pq.isEmpty()) {
-            int v = pq.remove();
+            int node = pq.minItem();
+            int dist = pq.minKey();
+            pq.remove();
+
+            if (distTo[node] >)
 
 
 
