@@ -6,10 +6,11 @@ import java.util.ArrayList;
  * Created by Pete Wilcox on 3/20/2016.
  * petercwilcox@gmail.com
  */
-public class MinHeap<Item extends Comparable>
+public class IndexMinHeap<Key extends Comparable<Key>, Item>
 {
-    private ArrayList<Item> heap;
-    private int             size;
+    private ArrayList<Key> keys;
+    private ArrayList<Item> vals;
+    private int size;
 
     // Sink the element when added
     private void sink(int i)
@@ -40,15 +41,17 @@ public class MinHeap<Item extends Comparable>
         }
     }
 
-    public MinHeap()
+    public IndexMinHeap()
     {
-        heap = new ArrayList<>();
+        keys = new ArrayList<>();
+        vals = new ArrayList<>();
         size = 0;
     }
 
-    public void insert(Item i)
+    public void insert(Item i, Key k)
     {
-        heap.add(i);
+        keys.add(k);
+        vals.add(i);
         size++;
         swim(size);
 
@@ -57,21 +60,25 @@ public class MinHeap<Item extends Comparable>
     public Item remove()
     {
         exch(1, size--);
-        Item temp = heap.remove(size);
+        Item temp = vals.remove(size);
+        Key k = keys.remove(size);
         sink(1);
         return temp;
     }
 
     private boolean less(int a, int b)
     {
-        return heap.get(a - 1).compareTo(heap.get(b - 1)) < 0;
+        return keys.get(a - 1).compareTo(keys.get(b - 1)) < 0;
     }
 
     private void exch(int a, int b)
     {
-        Item temp = heap.get(a - 1);
-        heap.set(a - 1, heap.get(b - 1));
-        heap.set(b - 1, temp);
+        Key tempKey = keys.get(a - 1);
+        Item tempItem = vals.get(a - 1);
+        keys.set(a - 1, keys.get(b - 1));
+        vals.set(a - 1, vals.get(b - 1));
+        keys.set(b - 1, tempKey);
+        vals.set(b - 1, tempItem);
     }
 
     public int getSize()
@@ -88,10 +95,28 @@ public class MinHeap<Item extends Comparable>
     {
         String output = "";
 
-        for (Item i : heap)
+        for (Key i : keys)
         {
             output = output + i + " ";
         }
         return output;
+    }
+
+    public boolean contains(Item item)
+    {
+        return vals.contains(item);
+    }
+
+
+    public void change(Item item, Key key)
+    {
+        if (contains(item))
+        {
+            int oldIndex = vals.indexOf(item);
+            keys.set(oldIndex, key);
+            if (less(oldIndex, oldIndex / 2))
+                swim(oldIndex);
+            else sink(oldIndex);
+        }
     }
 }
