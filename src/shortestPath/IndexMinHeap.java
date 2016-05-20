@@ -60,10 +60,10 @@ public class IndexMinHeap<Key extends Comparable<Key>, Item>
     public Item remove()
     {
         exch(1, size--);
-        Item temp = vals.remove(size);
+        Item i = vals.remove(size);
         Key k = keys.remove(size);
         sink(1);
-        return temp;
+        return i;
     }
 
     private boolean less(int a, int b)

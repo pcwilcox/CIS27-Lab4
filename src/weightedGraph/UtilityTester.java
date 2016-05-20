@@ -42,7 +42,7 @@ public class UtilityTester
 
     private static EdgeWeightedGraph loadGraph()
     {
-        File graph = new File("C:\\Users\\Pete\\IdeaProjects\\CIS27-Lab4\\src\\weightedGraph\\weightedGraph.txt");
+        File graph = new File("C:\\Users\\Lord Yod\\IdeaProjects\\CIS27-Lab4\\src\\weightedGraph\\weightedGraph.txt");
 
         try
         {

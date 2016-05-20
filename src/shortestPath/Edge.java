@@ -7,14 +7,14 @@ package shortestPath;
 public class Edge
         implements Comparable<Edge>
 {
-    private final int v;
-    private final int w;
+    private final int from;
+    private final int to;
     private final int weight;
 
     public Edge(int v, int w, int weight)
     {
-        this.v = v;
-        this.w = w;
+        this.from = v;
+        this.to = w;
         this.weight = weight;
     }
 
@@ -25,20 +25,28 @@ public class Edge
 
     public int either()
     {
-        return v;
+        return from;
+    }
+
+    public int to() {
+        return to;
+    }
+
+    public int from() {
+        return from;
     }
 
     public int other(int vertex)
     {
-        if (vertex == v) return w;
-        else if (vertex == w) return v;
+        if (vertex == from) return to;
+        else if (vertex == to) return from;
         else throw new RuntimeException("Inconsistent edge.");
     }
 
     public int otherVertex(boolean[] m)
     {
-        if (!m[v]) return v;
-        return w;
+        if (!m[from]) return from;
+        return to;
     }
 
     public int compareTo(Edge that)
@@ -50,17 +58,17 @@ public class Edge
 
     public boolean isMarked(boolean[] marked)
     {
-        return marked[v] == true && marked[w] == true;
+        return marked[from] == true && marked[to] == true;
     }
 
     public void mark(boolean[] marked)
     {
-        marked[v] = true;
-        marked[w] = true;
+        marked[from] = true;
+        marked[to] = true;
     }
 
     public String toString()
     {
-        return String.format("[" + v + ", " + w + ", " + weight + "] ");
+        return String.format("[" + from + ", " + to + ", " + weight + "] ");
     }
 }
