@@ -9,6 +9,7 @@ import java.util.Iterator;
 public class Stack<Item>
         implements Iterable<Item>
 {
+    // Simple stack class
     private Node first;
     private int N;
 

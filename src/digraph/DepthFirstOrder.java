@@ -6,6 +6,7 @@ package digraph;
  */
 public class DepthFirstOrder
 {
+    // Class adapted from textbook
     private boolean[] marked;
 
     private Queue<Integer> pre;

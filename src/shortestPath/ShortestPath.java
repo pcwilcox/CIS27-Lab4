@@ -6,6 +6,7 @@ package shortestPath;
  */
 public class ShortestPath
 {
+    // Uses Dijkstra's algorithm to find shortest path to each reachable node
     private EdgeWeightedGraph              g;
     private Edge[]                         edgeTo;
     private int[]                          distTo;
@@ -38,6 +39,7 @@ public class ShortestPath
         }
     }
 
+    // Relax all adjacent edges and update distance values
     private void relax(int v)
     {
         for (Edge e : g.adj(v))
@@ -69,11 +71,13 @@ public class ShortestPath
         return output;
     }
 
+    // Returns the distance to a particular vertex
     public int distTo(int v)
     {
         return distTo[v];
     }
 
+    // Returns total cost of the entire tree
     public int cost() {
         cost = 0;
         for (int i = 0; i < V; i++) {

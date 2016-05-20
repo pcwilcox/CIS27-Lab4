@@ -8,6 +8,7 @@ import java.util.Scanner;
  */
 public class Digraph
 {
+    // Digraph class as adapted from the textbook
     private final int V;
     private int E;
     private Bag<Integer>[] adj;
@@ -54,6 +55,7 @@ public class Digraph
         return adj[v];
     }
 
+    // Returns the same graph with directed edges reversed
     public Digraph reverse()
     {
         Digraph R = new Digraph(V);

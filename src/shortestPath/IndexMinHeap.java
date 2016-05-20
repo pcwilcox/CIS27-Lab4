@@ -6,7 +6,9 @@ package shortestPath;
  */
 public class IndexMinHeap
 {
-    // Minimum-ordered priority queue
+    // Minimum-ordered priority queue adapted from textbook and lab 2 stuff
+    // The heap is indexed on the keys[] array, while the exch() method will
+    // swap values in vals[] as well.
     private int[] keys;
     private int[] vals;
     private int   size;

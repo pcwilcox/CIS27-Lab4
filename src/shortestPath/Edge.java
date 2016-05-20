@@ -7,6 +7,7 @@ package shortestPath;
 public class Edge
         implements Comparable<Edge>
 {
+    // Slightly modified version to make Dijkstra's easier
     private final int from;
     private final int to;
     private final int weight;

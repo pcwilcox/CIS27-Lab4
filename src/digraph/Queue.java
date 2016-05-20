@@ -9,6 +9,7 @@ import java.util.Iterator;
 public class Queue<Item>
         implements Iterable<Item>
 {
+    // Simple queue class
     private Node first;
     private Node last;
     private int N;

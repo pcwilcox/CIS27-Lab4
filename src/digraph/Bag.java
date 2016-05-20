@@ -9,6 +9,7 @@ import java.util.Iterator;
 public class Bag<Item>
         implements Iterable<Item>
 {
+    // Simple bag class
     private Node first;
 
     private class Node

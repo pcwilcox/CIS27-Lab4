@@ -15,6 +15,8 @@ public class MST
     private MinHeap<Edge> possibles;
     private int root;
 
+    // This constructor takes a list of root vertices and constructs
+    // an acyclic tree.
     public MST(EdgeWeightedGraph g, int[] roots)
     {
         G = g;
@@ -32,12 +34,9 @@ public class MST
 
         while (!possibles.isEmpty())
         {
-
             Edge temp = possibles.remove();
-            //System.out.println("Possibles not empty yet - removed " + temp + ".");
             if (!temp.isMarked(marked))
             {
-
                 tree.add(temp);
                 cost += temp.weight();
 
@@ -45,13 +44,11 @@ public class MST
                     possibles.insert(e);
 
                 temp.mark(marked);
-
-
-                //System.out.println("Added edge " + temp);
             }
         }
     }
 
+    // This constructor does the same thing from a single vertex
     public MST(EdgeWeightedGraph g, int root)
     {
         G = g;
@@ -67,9 +64,7 @@ public class MST
 
         while (!possibles.isEmpty())
         {
-
             Edge temp = possibles.remove();
-            //System.out.println("Possibles not empty yet - removed " + temp + ".");
             if (!temp.isMarked(marked))
             {
                 tree.add(temp);

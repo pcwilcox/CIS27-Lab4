@@ -8,6 +8,7 @@ import java.util.Scanner;
  */
 public class EdgeWeightedGraph
 {
+    // Class adapted from the textbook
     private final int V;
     private int E;
     private Bag<Edge>[] adj;

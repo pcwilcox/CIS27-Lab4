@@ -7,6 +7,7 @@ package weightedGraph;
 public class Edge
         implements Comparable<Edge>
 {
+    // Class adapted from the textbook
     private final int v;
     private final int w;
     private final int weight;

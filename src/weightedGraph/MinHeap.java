@@ -8,6 +8,7 @@ import java.util.ArrayList;
  */
 public class MinHeap<Item extends Comparable>
 {
+    // Adapted from Lab 2 class
     private ArrayList<Item> heap;
     private int             size;
 

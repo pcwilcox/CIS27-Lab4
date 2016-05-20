@@ -6,12 +6,14 @@ package digraph;
  */
 public class ConnectedComponents
 {
+    // Class adapted from the textbook
     private boolean[] marked;
     private int[] id;
     private int count;
 
     public ConnectedComponents(Digraph G)
     {
+        // Uses the reversed graph's reverse post order to assign component IDs
         marked = new boolean[G.V()];
         id = new int[G.V()];
         DepthFirstOrder order = new DepthFirstOrder(G.reverse());
