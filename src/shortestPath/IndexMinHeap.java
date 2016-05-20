@@ -1,18 +1,17 @@
 package shortestPath;
 
-import java.util.ArrayList;
-
 /**
  * Created by Pete Wilcox on 3/20/2016.
  * petercwilcox@gmail.com
  */
-public class IndexMinHeap<Key extends Comparable<Key>, Item>
+public class IndexMinHeap
 {
-    private ArrayList<Key> keys;
-    private ArrayList<Item> vals;
-    private int size;
+    // Minimum-ordered priority queue
+    private int[] keys;
+    private int[] vals;
+    private int   size;
 
-    // Sink the element when added
+    // Sink an element to its proper place
     private void sink(int i)
     {
         while (2 * i < size)
@@ -31,7 +30,7 @@ public class IndexMinHeap<Key extends Comparable<Key>, Item>
         }
     }
 
-    //
+    // Swim an element upwards
     private void swim(int i)
     {
         while (i > 1 && less(i, i / 2))
@@ -43,42 +42,55 @@ public class IndexMinHeap<Key extends Comparable<Key>, Item>
 
     public IndexMinHeap()
     {
-        keys = new ArrayList<>();
-        vals = new ArrayList<>();
+        keys = new int[1];
+        vals = new int[1];
         size = 0;
     }
 
-    public void insert(Item i, Key k)
+    // Add an element, resizing if necessary
+    public void insert(int i, int j)
     {
-        keys.add(k);
-        vals.add(i);
-        size++;
+        if (++size >= keys.length)
+        {
+            resize();
+        }
+
+        keys[size] = j;
+        vals[size] = i;
         swim(size);
 
     }
 
-    public Item remove()
+    // Swap the first and last elements,
+    // remove the last, sink the first,
+    // resize if necessary
+    public int remove()
     {
-        exch(1, size--);
-        Item i = vals.remove(size);
-        Key k = keys.remove(size);
+        exch(1, size);
+        int temp    = vals[size];
+        int tempKey = keys[size--];
         sink(1);
-        return i;
+        if (size <= keys.length / 2)
+        {
+            resize();
+        }
+        return temp;
     }
 
     private boolean less(int a, int b)
     {
-        return keys.get(a - 1).compareTo(keys.get(b - 1)) < 0;
+        return keys[a] < keys[b];
     }
 
     private void exch(int a, int b)
     {
-        Key tempKey = keys.get(a - 1);
-        Item tempItem = vals.get(a - 1);
-        keys.set(a - 1, keys.get(b - 1));
-        vals.set(a - 1, vals.get(b - 1));
-        keys.set(b - 1, tempKey);
-        vals.set(b - 1, tempItem);
+        int tempKey = keys[a];
+        keys[a] = keys[b];
+        keys[b] = tempKey;
+
+        int tempVal = vals[a];
+        vals[a] = vals[b];
+        vals[b] = tempVal;
     }
 
     public int getSize()
@@ -95,36 +107,75 @@ public class IndexMinHeap<Key extends Comparable<Key>, Item>
     {
         String output = "";
 
-        for (Key i : keys)
+        for (int i = 1; i <= size; i++)
         {
-            output = output + i + " ";
+            output = output + "(" + vals[i] + ", " + keys[i] + ")";
         }
         return output;
     }
 
-    public boolean contains(Item item)
+    // Helper to resize as necessary
+    private void resize()
     {
-        return vals.contains(item);
+        int[] newKeys = new int[2 * size];
+        int[] newVals = new int[2 * size];
+        for (int i = 1; i <= size &&
+                        i < keys.length &&
+                        i < newKeys.length; i++)
+        {
+            newKeys[i] = keys[i];
+            newVals[i] = vals[i];
+        }
+        keys = newKeys;
+        vals = newVals;
+    }
+
+    public boolean contains(int v)
+    {
+        for (int i = 0; i < size; i++)
+        {
+            if (vals[i] == v)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
 
-    public void change(Item item, Key key)
+    public void change(int item, int key)
     {
         if (contains(item))
         {
-            int oldIndex = vals.indexOf(item);
-            keys.set(oldIndex, key);
-            if (less(oldIndex, oldIndex / 2))
+            int oldIndex = 0;
+            for (int i = 0; i < size; i++)
+            {
+                if (vals[i] == item)
+                {
+                    oldIndex = i;
+                    keys[i] = key;
+                }
+            }
+
+
+            if (oldIndex > 1 && less(oldIndex, oldIndex / 2))
+            {
                 swim(oldIndex);
-            else sink(oldIndex);
+            }
+            else if (oldIndex < size)
+            {
+                sink(oldIndex);
+            }
         }
     }
 
-    public Key minKey() {
-        return keys.get(1);
+    public int minKey()
+    {
+        return keys[1];
     }
 
-    public Item minItem() {
-        return vals.get(1);
+    public int minItem()
+    {
+        return vals[1];
     }
 }

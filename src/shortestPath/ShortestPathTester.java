@@ -22,22 +22,11 @@ public class ShortestPathTester
 
         for (int i = 0; i < 50 && i != 7 && i != 14 && i != 25 && i != 28 && i != 40; i++) {
             System.out.println("Testing vertex " + i + ": ");
-            int path7 = test7.distTo(i);
-            int path14 = test14.distTo(i);
-            int path25 = test25.distTo(i);
-            int path28 = test28.distTo(i);
-            int path40 = test40.distTo(i);
-
-            IndexMinHeap<Integer, ShortestPath> pq = new IndexMinHeap<>();
-            pq.insert(test7, path7);
-            pq.insert(test14, path14);
-            pq.insert(test25, path25);
-            pq.insert(test28, path28);
-            pq.insert(test40, path40);
-
-            System.out.println("Shortest path:" + pq.minKey());
-            System.out.println("Tree: " + pq.minItem());
-
+            System.out.println("Shortest path from vertex 7: " + test7.distTo(i));
+            System.out.println("Shortest path from vertex 14: " + test14.distTo(i));
+            System.out.println("Shortest path from vertex 25: " + test25.distTo(i));
+            System.out.println("Shortest path from vertex 28: " + test28.distTo(i));
+            System.out.println("Shortest path from vertex 40: " + test40.distTo(i));
 
         }
     }

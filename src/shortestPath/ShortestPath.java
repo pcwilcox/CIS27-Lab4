@@ -11,7 +11,8 @@ public class ShortestPath
     private int[]                          distTo;
     private int                            V;
     private int                            E;
-    private IndexMinHeap<Integer, Integer> pq;
+    private IndexMinHeap pq;
+    private int cost;
 
     public ShortestPath(EdgeWeightedGraph G, int root)
     {
@@ -21,7 +22,7 @@ public class ShortestPath
 
         edgeTo = new Edge[V];
         distTo = new int[V];
-        pq = new IndexMinHeap<>();
+        pq = new IndexMinHeap();
 
         for (int i = 0; i < V; i++)
         {
@@ -71,5 +72,12 @@ public class ShortestPath
     public int distTo(int v)
     {
         return distTo[v];
+    }
+
+    public int cost() {
+        for (int i = 0; i < V; i++) {
+            cost += distTo(i);
+        }
+        return cost;
     }
 }
