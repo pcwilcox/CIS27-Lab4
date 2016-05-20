@@ -12,9 +12,6 @@ public class UtilityTester
 {
     public static void main(String[] args)
     {
-
-
-
         EdgeWeightedGraph G = loadGraph();
 
         System.out.println("Graph loaded.");
@@ -31,24 +28,16 @@ public class UtilityTester
 
     }
 
-    private static void minCost(EdgeWeightedGraph g) {
-
+    private static void minCost(EdgeWeightedGraph g)
+    {
         System.out.println("Testing single-root MST:");
 
-        MinHeap<MST> costHeap = new MinHeap<>();
-
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 50; i++)
+        {
             MST temp = new MST(g, i);
             System.out.println("Test MST " + i + " cost: " + temp.cost());
-            costHeap.insert(temp);
+            System.out.println(temp);
         }
-
-        MST min = costHeap.remove();
-
-        System.out.println("Minimum cost at root " + min.root());
-
-        System.out.println("Minimum cost tree: " + min);
-
     }
 
     private static EdgeWeightedGraph loadGraph()

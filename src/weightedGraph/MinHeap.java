@@ -21,7 +21,7 @@ public class MinHeap<Item extends Comparable>
             {
                 j++;
             }
-            if (!less(i, j))
+            if (!less(j, i))
             {
                 break;
             }

@@ -70,12 +70,11 @@ public class MST
             //System.out.println("Possibles not empty yet - removed " + temp + ".");
             if (!temp.isMarked(marked))
             {
-                temp.mark(marked);
-
                 tree.add(temp);
                 cost += temp.weight();
                 for (Edge e : G.adj(temp.otherVertex(marked)))
                     possibles.insert(e);
+                temp.mark(marked);
             }
         }
     }
