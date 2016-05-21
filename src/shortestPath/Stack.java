@@ -16,6 +16,10 @@ public class Stack<Item>
     {
         Item item;
         Node next;
+
+        public String toString() {
+            return item.toString();
+        }
     }
 
     public boolean isEmpty()
@@ -43,6 +47,18 @@ public class Stack<Item>
         first = first.next;
         N++;
         return item;
+    }
+
+    public String toString()
+    {
+        Node current = first;
+        String output = "";
+        while (current != null)
+        {
+            output = output + current;
+            current = current.next;
+        }
+        return output;
     }
 
     public Iterator<Item> iterator()

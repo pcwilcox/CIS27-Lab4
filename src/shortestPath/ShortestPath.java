@@ -85,4 +85,15 @@ public class ShortestPath
         }
         return cost;
     }
+
+    public Stack<Edge> path(int v) {
+        Stack<Edge> path = new Stack<>();
+        int current = v;
+        while (edgeTo[current] != null) {
+            Edge temp = edgeTo[current];
+            path.push(temp);
+            current = temp.other(current);
+        }
+        return path;
+    }
 }

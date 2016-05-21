@@ -23,34 +23,44 @@ public class ShortestPathTester
 
         for (int i = 0; i < 50; i++)
         {
-            System.out.println(
-                    "vertex " + i
-                    + "- root 7: " + test7.distTo(i)
-                    + " root 14: " + test14.distTo(i)
-                    + " root 25: " + test25.distTo(i)
-                    + " root 28: " + test28.distTo(i)
-                    + " root 40: " + test40.distTo(i));
+            if (i == 7 || i == 14 || i == 25 || i == 28 || i == 40) continue;
+            int dist = test7.distTo(i);
+            Stack<Edge> path = test7.path(i);
+            if (dist > test14.distTo(i)) {
+                dist = test14.distTo(i);
+                path = test14.path(i);
+            }
+            if (dist > test25.distTo(i)) {
+                dist = test25.distTo(i);
+                path = test25.path(i);
+            }
+            if (dist > test28.distTo(i)) {
+                dist = test28.distTo(i);
+                path = test28.path(i);
+            }
+            if (dist > test40.distTo(i)) {
+                dist = test40.distTo(i);
+                path = test40.path(i);
+            }
+            System.out.println("Vertex " + i + " minimum distance: " + dist + ". Path: " + path);
+
         }
 
         int shortest = 1000000;
         int actualShortest = 0;
 
+        ShortestPath[] paths = new ShortestPath[50];
+
         for (int i = 0; i < 50; i++)
         {
-            ShortestPath temp = new ShortestPath(graph, i);
-            int w = temp.cost();
-            System.out.println("Path root " + i + ". Cost: " + w + ". Tree: " + temp);
-
-            if (shortest > w)
-            {
-                System.out.println("Old shortest: " + shortest);
-                shortest = w;
+            paths[i] = new ShortestPath(graph, i);
+            if (paths[i].cost() < shortest) {
                 actualShortest = i;
-                System.out.println("New shortest: " + shortest);
+                shortest = paths[i].cost();
             }
         }
 
-        System.out.println("Shortest path at vertex " + actualShortest + ".");
+        System.out.println("Shortest path at vertex " + actualShortest + ". Cost: " + shortest + ". Tree: " + paths[actualShortest]);
     }
 
     private static EdgeWeightedGraph loadGraph()
