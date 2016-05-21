@@ -7,11 +7,11 @@ package shortestPath;
 public class ShortestPath
 {
     // Uses Dijkstra's algorithm to find shortest path to each reachable node
-    private EdgeWeightedGraph              g;
-    private Edge[]                         edgeTo;
-    private int[]                          distTo;
-    private int                            V;
-    private int                            E;
+    private EdgeWeightedGraph g;
+    private Edge[] edgeTo;
+    private int[] distTo;
+    private int V;
+    private int E;
     private IndexMinHeap pq;
     private int cost;
 
@@ -52,8 +52,7 @@ public class ShortestPath
                 if (pq.contains(w))
                 {
                     pq.change(w, distTo[w]);
-                }
-                else
+                } else
                 {
                     pq.insert(w, distTo[w]);
                 }
@@ -78,18 +77,25 @@ public class ShortestPath
     }
 
     // Returns total cost of the entire tree
-    public int cost() {
+    public int cost()
+    {
         cost = 0;
-        for (int i = 0; i < V; i++) {
+        for (int i = 0; i < V; i++)
+        {
             cost += distTo(i);
         }
         return cost;
     }
 
-    public Stack<Edge> path(int v) {
+    // Returns the path from a vertex to the root of the tree.
+    // Stored as a stack so that iterating through it will
+    // lead from the root to the vertex.
+    public Stack<Edge> path(int v)
+    {
         Stack<Edge> path = new Stack<>();
         int current = v;
-        while (edgeTo[current] != null) {
+        while (edgeTo[current] != null)
+        {
             Edge temp = edgeTo[current];
             path.push(temp);
             current = temp.other(current);

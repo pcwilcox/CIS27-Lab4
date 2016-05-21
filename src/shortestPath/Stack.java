@@ -17,7 +17,8 @@ public class Stack<Item>
         Item item;
         Node next;
 
-        public String toString() {
+        public String toString()
+        {
             return item.toString();
         }
     }

@@ -29,11 +29,13 @@ public class Edge
         return from;
     }
 
-    public int to() {
+    public int to()
+    {
         return to;
     }
 
-    public int from() {
+    public int from()
+    {
         return from;
     }
 
